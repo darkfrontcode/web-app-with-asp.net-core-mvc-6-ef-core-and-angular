@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Routing;
+using TheWorld.Services;
 
 namespace TheWorld
 {
@@ -34,6 +35,7 @@ namespace TheWorld
 
 		public void ConfigureServices(IServiceCollection services)
         {
+			services.AddScoped<IMailService, DebugMailService>();
 			services.AddMvc();
         }
 
