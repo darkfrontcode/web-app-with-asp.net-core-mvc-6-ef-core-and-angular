@@ -8798,10 +8798,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ueslei_de_Souza\\Desktop\\TheWorld\\TheWorld\\TheWorld.csproj",
+      "projectUniqueName": "C:\\Users\\Ueslei_de_Souza\\Desktop\\web-app-with-asp.net-core-mvc-6-ef-core-and-angular\\TheWorld\\TheWorld\\TheWorld.csproj",
       "projectName": "TheWorld",
-      "projectPath": "C:\\Users\\Ueslei_de_Souza\\Desktop\\TheWorld\\TheWorld\\TheWorld.csproj",
-      "outputPath": "C:\\Users\\Ueslei_de_Souza\\Desktop\\TheWorld\\TheWorld\\obj\\",
+      "projectPath": "C:\\Users\\Ueslei_de_Souza\\Desktop\\web-app-with-asp.net-core-mvc-6-ef-core-and-angular\\TheWorld\\TheWorld\\TheWorld.csproj",
+      "outputPath": "C:\\Users\\Ueslei_de_Souza\\Desktop\\web-app-with-asp.net-core-mvc-6-ef-core-and-angular\\TheWorld\\TheWorld\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
