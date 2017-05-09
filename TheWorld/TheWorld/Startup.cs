@@ -7,19 +7,42 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Routing;
 
 namespace TheWorld
 {
     public class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
+
+		private Action<IRouteBuilder> MapRoute()
+		{
+			return config =>
+			{
+				config.MapRoute(
+					name: "Default",
+					template: "{controller}/{action}/{id?}",
+					defaults: new { controller = "App", action = "Index" }
+				);
+			};
+		}
+
+		private void ExceptionPage(IApplicationBuilder app, IHostingEnvironment env)
+		{
+			bool dev = env.IsDevelopment();
+			if(dev) app.UseDeveloperExceptionPage();
+		}
+
+		public void ConfigureServices(IServiceCollection services)
         {
+			services.AddMvc();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-			app.UseDefaultFiles();
+			ExceptionPage(app, env);
 			app.UseStaticFiles();
+			app.UseMvc(MapRoute());
 		}
-    }
+
+	}
 }

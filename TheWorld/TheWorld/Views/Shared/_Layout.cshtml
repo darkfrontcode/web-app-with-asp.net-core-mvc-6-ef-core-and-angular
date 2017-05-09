@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>The World - @ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <div id="sidebar">
+        <img src="http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46ad551392.png" alt="headshot" class="headshot" />
+        <span id="userName">Sam Hastings</span>
+        <ul class="menu">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+
+    <div id="wrapper">
+        <div id="main">
+            <div>
+                <button id="sideBarToggle">Toggle Menu</button>
+            </div>
+            @RenderBody()
+        </div>
+        <div id="footer">
+            &copy; 2017 The World Ltd.
+        </div>
+    </div>
+
+    <script type="text/javascript" src="~/js/site.js"></script>
+
+</body>
+</html>
