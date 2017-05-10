@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,34 +12,77 @@ namespace TheWorld.Controllers.Web
 {
     public class AppController : Controller
     {
-		private IMailService mailService;
 
-		public AppController(IMailService mailService)
-		{
-			this.mailService = mailService;
-		}
-        
-		public IActionResult Index()
-		{
-			return View();
-		}
+		#region Props
 
-		public IActionResult About()
-		{
-			return View();
-		}
+			private IMailService mailService;
+			private IConfigurationRoot config;
 
-		[HttpPost]
-		public IActionResult Contact(ContactViewModel model)
-		{
-			mailService.SendMail("fake@notserver.com", model.Email, "From TheWorld", model.Message);
-			return View();
-		}
+		#endregion
 
-		public IActionResult Contact()
-		{
-			return View();
-		}
+		#region Constructor
+
+		public AppController(IMailService mailService, IConfigurationRoot config)
+			{
+				this.mailService = mailService;
+				this.config = config;
+			}
+
+		#endregion
+
+		#region Index
+
+			public IActionResult Index()
+			{
+				return View();
+			}
+
+		#endregion
+
+		#region About
+
+			public IActionResult About()
+			{
+				return View();
+			}
+
+		#endregion
+
+		#region Contact
+
+			private void ContactPostValidations(ContactViewModel model)
+			{
+				if(model.Email.Contains("aol.com"))
+				{
+					ModelState.AddModelError("Email", "We don't support AOL addresses");
+				}	
+			}
+
+			private void ContactSendEmail(ContactViewModel model)
+			{
+				if(ModelState.IsValid)
+				{
+					var to = config["MailSettings:ToAddress"];
+					mailService.SendMail(to, model.Email, "From TheWorld", model.Message);
+					ModelState.Clear();
+					ViewBag.UserMessage = "Message Sent";
+				}
+			}
+
+			[HttpPost]
+			public IActionResult Contact(ContactViewModel model)
+			{
+				ContactPostValidations(model);
+				ContactSendEmail(model);
+				return View();
+			}
+
+			public IActionResult Contact()
+			{
+				return View();
+			} 
+
+		#endregion
 
 	}
 }
