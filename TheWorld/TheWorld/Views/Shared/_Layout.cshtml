@@ -1,42 +1,68 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>The World - @ViewBag.Title</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="~/css/site.css" />
+	<title>The World - @ViewBag.Title</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="~/css/site.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" />
 </head>
 <body>
 
-    <div id="sidebar">
-        <img src="http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46ad551392.png" alt="headshot" class="headshot" />
-        <span id="userName">Sam Hastings</span>
-        <ul class="menu">
-            <li class="active">
-                <a asp-controller="App" asp-action="Index">Home</a>
-            </li>
-            <li>
-                <a asp-controller="App" asp-action="About">About</a>
-            </li>
-            <li>
-                <a asp-controller="App" asp-action="Contact">Contact</a>
-            </li>
-        </ul>
-    </div>
+	<div id="sidebar">
+		<img src="http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46ad551392.png" alt="headshot" class="headshot" />
+		<span id="userName">Dark Front Code</span>
+		<ul class="nav">
+			<li class="active">
+				<a asp-controller="App" asp-action="Index">Home</a>
+			</li>
+			<li>
+				<a asp-controller="App" asp-action="About">About</a>
+			</li>
+			<li>
+				<a asp-controller="App" asp-action="Contact">Contact</a>
+			</li>
+		</ul>
+	</div>
 
-    <div id="wrapper">
-        <div id="main">
-            <div>
-                <button id="sideBarToggle">Toggle Menu</button>
-            </div>
-            @RenderBody()
-        </div>
-        <div id="footer">
-            &copy; 2017 The World Ltd.
-        </div>
-    </div>
+	<div id="wrapper">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav navbar-left">
+					<li>
+						<button id="sideBarToggle" class="btn btn-primary btn-sm">
+							<i class="glyphicon glyphicon-chevron-left"></i>
+						</button>
+					</li>
+				</ul>
+				<a asp-controller="App" asp-action="Index" class="navbar-brand">The World</a>
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="#" class="btn btn-info btn-sm">
+							<i class="fa fa-save"></i> Save
+						</a>
+					</li>
+					<li>
+						<a href="#" class="btn btn-info btn-sm">
+							<i class="fa fa-print"></i> Print
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<div id="main" class="container-fluid">
+			@RenderBody()
+		</div>
+		<div id="footer" class="container-fluid">
+			<div class="navbar navbar-inverse navbar-fixed-bottom">
+				<h4 class="text-center text-info">&copy; 2017 The World Ltd.</h4>
+			</div>
+		</div>
+	</div>
 
-    <script type="text/javascript" src="~/js/site.js"></script>
-    @RenderSection("scripts", false)
+	<script type="text/javascript" src="~/js/site.js"></script>
+	@RenderSection("scripts", false)
 
 </body>
 </html>
