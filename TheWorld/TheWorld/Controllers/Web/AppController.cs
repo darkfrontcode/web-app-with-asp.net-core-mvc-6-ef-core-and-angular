@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheWorld.Models;
 using TheWorld.Services;
 using TheWorld.ViewModels;
 
@@ -17,15 +18,22 @@ namespace TheWorld.Controllers.Web
 
 			private IMailService mailService;
 			private IConfigurationRoot config;
+			private WorldContext context;
 
 		#endregion
 
 		#region Constructor
 
-		public AppController(IMailService mailService, IConfigurationRoot config)
+			public AppController
+			(
+				IMailService mailService, 
+				IConfigurationRoot config, 
+				WorldContext context
+			)
 			{
 				this.mailService = mailService;
 				this.config = config;
+				this.context = context;
 			}
 
 		#endregion
@@ -34,7 +42,8 @@ namespace TheWorld.Controllers.Web
 
 			public IActionResult Index()
 			{
-				return View();
+				var data = context.Trips.ToList();
+				return View(data);
 			}
 
 		#endregion
