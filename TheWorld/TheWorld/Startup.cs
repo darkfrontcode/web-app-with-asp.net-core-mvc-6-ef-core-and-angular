@@ -93,14 +93,20 @@ namespace TheWorld
 				services.AddSingleton(config);
 				AddIMailService(services);
 				services.AddDbContext<WorldContext>();
+				services.AddTransient<WorldContextSeedData>();
 				services.AddMvc();
 			}
 
-			public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+			public void Configure(
+				IApplicationBuilder app, 
+				IHostingEnvironment env,
+				WorldContextSeedData seeder
+			)
 			{
 				ExceptionPage(app, env);
 				app.UseStaticFiles();
 				app.UseMvc(MapRoute());
+				seeder.EnsureSeedData().Wait();
 			}
 
 		#endregion
