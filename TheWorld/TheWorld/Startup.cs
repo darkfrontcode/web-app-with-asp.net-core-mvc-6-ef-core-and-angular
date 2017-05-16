@@ -50,7 +50,7 @@ namespace TheWorld
 
 		#region Map Route
 
-		private Action<IRouteBuilder> MapRoute()
+			private Action<IRouteBuilder> MapRoute()
 			{
 				return config =>
 				{
@@ -66,10 +66,22 @@ namespace TheWorld
 
 		#region Exception page config
 
-			private void ExceptionPage(IApplicationBuilder app, IHostingEnvironment env)
+			private void ExceptionPage(
+				IApplicationBuilder app, 
+				IHostingEnvironment env, 
+				ILoggerFactory factory
+			)
 			{
 				bool dev = env.IsDevelopment();
-				if(dev) app.UseDeveloperExceptionPage();
+				if(dev)
+				{
+					app.UseDeveloperExceptionPage();
+					factory.AddDebug(LogLevel.Information);
+				}
+				else
+				{
+					factory.AddDebug(LogLevel.Error);
+				}
 			}
 
 		#endregion
@@ -93,17 +105,20 @@ namespace TheWorld
 				services.AddSingleton(config);
 				AddIMailService(services);
 				services.AddDbContext<WorldContext>();
+				services.AddScoped<IWorldRepository, WorldRepository>();
 				services.AddTransient<WorldContextSeedData>();
+				services.AddLogging();
 				services.AddMvc();
 			}
 
 			public void Configure(
 				IApplicationBuilder app, 
 				IHostingEnvironment env,
-				WorldContextSeedData seeder
+				WorldContextSeedData seeder,
+				ILoggerFactory factory
 			)
 			{
-				ExceptionPage(app, env);
+				ExceptionPage(app, env, factory);
 				app.UseStaticFiles();
 				app.UseMvc(MapRoute());
 				seeder.EnsureSeedData().Wait();

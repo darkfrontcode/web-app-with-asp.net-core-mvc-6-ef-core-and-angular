@@ -22,8 +22,7 @@ namespace TheWorld.Models
 					DateCreated = DateTime.UtcNow,
 					Name = "US Trip",
 					UserName = "",
-					Stops = new List<Stop>(){}
-					//Stops = MockTrips.US()
+					Stops = MockTrips.US()
 				};
 		}
 
@@ -34,8 +33,7 @@ namespace TheWorld.Models
 					DateCreated = DateTime.UtcNow,
 					Name = "World Trip",
 					UserName = "",
-					Stops = new List<Stop>(){}
-					//Stops = MockTrips.World()
+					Stops = MockTrips.World()
 				};
 		}
 

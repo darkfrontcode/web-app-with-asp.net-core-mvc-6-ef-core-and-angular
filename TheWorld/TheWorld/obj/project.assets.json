@@ -1402,6 +1402,19 @@
           "lib/netstandard1.3/Microsoft.Extensions.Logging.Console.dll": {}
         }
       },
+      "Microsoft.Extensions.Logging.Debug/1.1.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.2",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.Extensions.Logging.Debug.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.Extensions.Logging.Debug.dll": {}
+        }
+      },
       "Microsoft.Extensions.ObjectPool/1.1.1": {
         "type": "package",
         "dependencies": {
@@ -5080,6 +5093,19 @@
         "lib/netstandard1.3/Microsoft.Extensions.Logging.Console.xml",
         "microsoft.extensions.logging.console.1.1.2.nupkg.sha512",
         "microsoft.extensions.logging.console.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.Logging.Debug/1.1.2": {
+      "sha512": "AbAJso49rHCUmvFmG/6HXBodgBIfNiXukbEsRxDwx/Ccfi1WqTmqwa0sg3FC4KZr+SkLUnaF79juSFW5Ag7z0w==",
+      "type": "package",
+      "path": "microsoft.extensions.logging.debug/1.1.2",
+      "files": [
+        "lib/net451/Microsoft.Extensions.Logging.Debug.dll",
+        "lib/net451/Microsoft.Extensions.Logging.Debug.xml",
+        "lib/netstandard1.3/Microsoft.Extensions.Logging.Debug.dll",
+        "lib/netstandard1.3/Microsoft.Extensions.Logging.Debug.xml",
+        "microsoft.extensions.logging.debug.1.1.2.nupkg.sha512",
+        "microsoft.extensions.logging.debug.nuspec"
       ]
     },
     "Microsoft.Extensions.ObjectPool/1.1.1": {
@@ -10396,6 +10422,7 @@
       "Microsoft.AspNetCore.StaticFiles >= 1.1.2",
       "Microsoft.EntityFrameworkCore.SqlServer >= 1.1.2",
       "Microsoft.EntityFrameworkCore.Tools >= 1.1.0-preview4-final",
+      "Microsoft.Extensions.Logging.Debug >= 1.1.2",
       "Microsoft.NETCore.App >= 1.1.1"
     ]
   },
@@ -10430,6 +10457,10 @@
             "target": "Package",
             "version": "1.1.2"
           },
+          "Microsoft.Extensions.Logging.Debug": {
+            "target": "Package",
+            "version": "1.1.2"
+          },
           "Microsoft.EntityFrameworkCore.Tools": {
             "target": "Package",
             "version": "1.1.0-preview4-final"
@@ -10445,7 +10476,7 @@
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
-            "version": "[1.1.2, )"
+            "version": "1.1.2"
           },
           "Microsoft.AspNetCore.Mvc": {
             "target": "Package",
