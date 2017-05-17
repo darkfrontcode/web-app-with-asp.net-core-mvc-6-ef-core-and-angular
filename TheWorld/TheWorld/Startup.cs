@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Routing;
 using TheWorld.Services;
 using Microsoft.Extensions.Configuration;
 using TheWorld.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace TheWorld
 {
@@ -98,6 +99,17 @@ namespace TheWorld
 
 		#endregion
 
+		#region CamelCase Options
+
+			private Action<Microsoft.AspNetCore.Mvc.MvcJsonOptions> CamelCaseConfig()
+			{
+				return config => {
+					config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+				};
+			}
+
+		#endregion
+
 		#region Configure Service
 
 			public void ConfigureServices(IServiceCollection services)
@@ -108,7 +120,7 @@ namespace TheWorld
 				services.AddScoped<IWorldRepository, WorldRepository>();
 				services.AddTransient<WorldContextSeedData>();
 				services.AddLogging();
-				services.AddMvc();
+				services.AddMvc().AddJsonOptions(CamelCaseConfig());
 			}
 
 			public void Configure(
