@@ -12,6 +12,8 @@ using TheWorld.Services;
 using Microsoft.Extensions.Configuration;
 using TheWorld.Models;
 using Newtonsoft.Json.Serialization;
+using AutoMapper;
+using TheWorld.ViewModels;
 
 namespace TheWorld
 {
@@ -110,6 +112,17 @@ namespace TheWorld
 
 		#endregion
 
+		#region Mapper Config
+
+			public Action<IMapperConfigurationExpression> MapperConfig()
+			{
+				return config => { 
+					config.CreateMap<TripViewModel, Trip>().ReverseMap();
+				};
+			}
+
+		#endregion
+
 		#region Configure Service
 
 			public void ConfigureServices(IServiceCollection services)
@@ -130,6 +143,7 @@ namespace TheWorld
 				ILoggerFactory factory
 			)
 			{
+				Mapper.Initialize(MapperConfig());
 				ExceptionPage(app, env, factory);
 				app.UseStaticFiles();
 				app.UseMvc(MapRoute());

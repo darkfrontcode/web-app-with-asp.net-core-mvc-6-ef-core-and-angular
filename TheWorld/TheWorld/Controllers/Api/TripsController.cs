@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,15 +23,24 @@ namespace TheWorld.Controllers.Api
 		[HttpGet("")]
         public IActionResult Get()
 		{
-			return Ok(repository.GetAllTrips());
+			try
+			{
+				var results = repository.GetAllTrips();
+				return Ok(Mapper.Map<IEnumerable<TripViewModel>>(results));
+			}
+			catch (Exception ex)
+			{
+				return BadRequest("Error occurred");
+			}
 		}
 
 		[HttpPost("")]
 		public IActionResult Post([FromBody]TripViewModel trip)
 		{
 			if (ModelState.IsValid)
-			{
-				return Created($"api/trips/{trip.Name}", trip);
+			{	
+				Trip newTrip = Mapper.Map<Trip>(trip);
+				return Created($"api/trips/{trip.Name}", Mapper.Map<TripViewModel>(newTrip));
 			}
 
 			return BadRequest("Bad data");
