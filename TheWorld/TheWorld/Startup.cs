@@ -118,6 +118,7 @@ namespace TheWorld
 			{
 				return config => { 
 					config.CreateMap<TripViewModel, Trip>().ReverseMap();
+					config.CreateMap<StopViewModel, Stop>().ReverseMap();
 				};
 			}
 
