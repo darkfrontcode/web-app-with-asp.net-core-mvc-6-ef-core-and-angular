@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace TheWorld.Models
 {
-    public class WorldContext : DbContext
+    public class WorldContext : IdentityDbContext<WorldUser>
     {
 		
 		public DbSet<Trip> Trips { get; set; }
