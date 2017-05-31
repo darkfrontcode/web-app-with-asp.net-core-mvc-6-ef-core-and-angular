@@ -14,6 +14,7 @@ using TheWorld.Models;
 using Newtonsoft.Json.Serialization;
 using AutoMapper;
 using TheWorld.ViewModels;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace TheWorld
 {
@@ -124,9 +125,22 @@ namespace TheWorld
 
 		#endregion
 
+		#region IdentityRoleConfig
+
+			public Action<IdentityOptions> IdentityRoleConfig()
+			{
+				return config => { 
+					config.User.RequireUniqueEmail = true;
+					config.Password.RequiredLength = 8;
+					config.Cookies.ApplicationCookie.LoginPath = "/Auth/Login";
+				};
+			}
+
+		#endregion
+
 		#region Configure Service
 
-			public void ConfigureServices(IServiceCollection services)
+		public void ConfigureServices(IServiceCollection services)
 			{
 				services.AddSingleton(config);
 				AddIMailService(services);
@@ -134,6 +148,7 @@ namespace TheWorld
 				services.AddScoped<IWorldRepository, WorldRepository>();
 				services.AddTransient<GeoCoordsService>();
 				services.AddTransient<WorldContextSeedData>();
+				services.AddIdentity<WorldUser, IdentityRole>(IdentityRoleConfig()).AddEntityFrameworkStores<WorldContext>();
 				services.AddLogging();
 				services.AddMvc().AddJsonOptions(CamelCaseConfig());
 			}
@@ -148,6 +163,7 @@ namespace TheWorld
 				Mapper.Initialize(MapperConfig());
 				ExceptionPage(app, env, factory);
 				app.UseStaticFiles();
+				app.UseIdentity();
 				app.UseMvc(MapRoute());
 				seeder.EnsureSeedData().Wait();
 			}
